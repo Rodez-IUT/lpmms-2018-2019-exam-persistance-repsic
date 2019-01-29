@@ -16,7 +16,8 @@ public class Project {
     private String title;
 
     private String description;
-
+    
+    private Long version;
 
     @NotNull
     @ManyToOne(cascade = {CascadeType.PERSIST})
@@ -47,6 +48,18 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public Long getVersion() {
+    	return version;
+    }
+    
+    public void setVersionUp() {
+    	if (this.version == null) {
+    		this.version = 0L;
+    	} else {
+    		this.version ++;
+    	}
     }
 
     public Enterprise getEnterprise() {

@@ -35,7 +35,44 @@ Il est strictement interdit de modifier le code contenu dans les classes de test
 1. Naviguez dans le projet, vérifiez qu'il a bien été reconnu votre IDE comme un projet Maven. Étudiez les classes du projet.
 2. Lancez l'ensemble des tests est vérifiez que tous les tests passent exceptés ceux de la classe _"ZEvaluationM2DLTest"_.
 
-Récupérez le contenu du fichier ENONCE.md disponible à l'URL fourni par votre enseignant et insérez le à la suite de ce fichier 
+Récupérez le contenu du fichier ENONCE.md disponible à l'URL fourni par votre enseignant et insérez le à la suite de ce fichier
+
+### Enoncé
+
+Introduction
+Récupérez le contenu du fichier "ZEvaluationLPMMSTest.java" disponible à l'adresse suivante et insérez le dans votre fichier "ZEvaluationLPMMSTest.java". Étudiez le code de la classe "ZEvaluationLPMMSTest". Votre travail consistera à faire en sorte que tous les tests commentés de cette classe passent en plus de tous les autres.
+
+Partie 1 - Gestion améliorée de la sauvegarde des objets métiers (7 points)
+Cette partie vise à évaluer votre capacité à faire un bon usage de la méthode "EntityManager.merge(...)".
+
+Décommentez le test "testSaveDetachedEnterprise" et modifiez le code principal de votre application pour faire en sorte que le test "testSaveDetachedEnterprise" passe. Vérifiez que l'ensemble des tests passent toujours. Si ce n'est pas le cas, modifiez votre code jusqu'à obtenir l'ensemble des tests au vert.
+
+La méthode "EnterpriseProjectService.save(Project project)" contient l'instruction "entityManager.flush()". En étudiant la documentation de l'API JPA, décrivez quelle garantie apporte cette instruction pour le bon fonctionnement de la méthode.
+
+// A COMPLETER :
+La méthode flush permet de synchroniser le contexte de persistance avec la base de données. Cela permet de mettre à jour la base sans que cela ne soit commité tant que la transaction n'est pas terminée.
+
+Décommentez le test "testSaveDetachedProject" et modifiez le code principal de votre application pour faire en sorte que le test "testSaveDetachedProject" passe. Vérifiez que l'ensemble des tests passent toujours. Si ce n'est pas le cas, modifiez votre code jusqu'à obtenir l'ensemble des tests au vert.
+
+Partie 2. Gestion du changement d'entreprise d'un projet (6 points)
+Décommentez le test "testSaveOfProjectAfterEnterpriseSwitch" et modifiez le code principal de votre application pour faire en sorte que le test "testSaveOfProjectAfterEnterpriseSwitch" passe. Vérifiez que l'ensemble des tests passent toujours. Si ce n'est pas le cas, modifiez votre code jusqu'à obtenir l'ensemble des tests au vert.
+
+Le test "testSaveOfProjectAfterEnterpriseSwitch" contient l'assertion suivante : "assertThat(savedProject, is(project))". Que pouvez vous en déduire sur le comportement de la méthode "merge" ?
+
+// A COMPLETER :
+La méthode merge permet de racorder un projet détaché "project" au contexte de persistance, pour que le projet qui est sauvegardé soit "project", et non pas une autre instance d'un projet identique.
+
+Partie 3. Optimistic locking (7 points)
+Étudiez la documentation de l'annotation "jaxa.persistence.Version" de l'API JPA.
+
+Décommentez le test "testProjectsAreVersionned" et modifiez le code principal de votre application pour faire en sorte que le test "testProjectsAreVersionned" passe. Vérifiez que l'ensemble des tests passent toujours. Si ce n'est pas le cas, modifiez votre code jusqu'à obtenir l'ensemble des tests au vert.
+
+Décommentez le test "testOptimisticLockingOnConcurrentProjectModification" et modifiez, si nécessaire, le code principal de votre application pour faire en sorte que le test "testOptimisticLockingOnConcurrentProjectModification" passe. Vérifiez que l'ensemble des tests passent toujours. Si ce n'est pas le cas, modifiez votre code jusqu'à obtenir l'ensemble des tests au vert.
+
+Expliquez clairement, en français, ce qui se passe dans le test "testOptimisticLockingOnConcurrentProjectModification".
+
+// A COMPLETER :
+Ce test simule un accès concurrentiel sur un projet. Et lorsque l'on modifie ce projet pendant qu'il est utilisé, on s'attend à ce que l'exception "OptimisticLockException" soit levée pour qu'un rollback soit demandé.
 
 
 
